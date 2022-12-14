@@ -13,7 +13,6 @@ WIN = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
 pygame.display.set_caption("Flappy Bird")
 gen = 0
 
-
 def loadImg(img: str):
     return pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", img)))
 
@@ -248,12 +247,13 @@ def main(genomes, config):
                     nets.pop(birds.index(bird))
                     ge.pop(birds.index(bird))
                     birds.pop(birds.index(bird))
-                if not pipe.passed and pipe.x < bird.x:
-                    pipe.passed = True
-                    add_pipe = True
 
             if pipe.x + pipe.PIPE_TOP.get_width() < 0:
                 rem.append(pipe)
+
+            if not pipe.passed and pipe.x < bird.x:
+                pipe.passed = True
+                add_pipe = True
 
         if add_pipe:
             score += 1
@@ -282,9 +282,8 @@ def run(config_path):
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
 
-    winner = p.run(main, 20)
+    winner = p.run(main, 50)
     print('\nBest genome:\n{!s}'.format(winner))
-
 
 if __name__ == '__main__':
     local_dir = os.path.dirname(__file__)  # give directory of current file
