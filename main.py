@@ -4,6 +4,8 @@ import time
 import os
 import random
 
+# Tutorial from tim
+
 pygame.font.init()
 
 WIN_WIDTH = 500
